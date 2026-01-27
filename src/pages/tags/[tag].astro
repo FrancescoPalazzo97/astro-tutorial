@@ -7,26 +7,28 @@ export async function getStaticPaths() {
         import.meta.glob("../posts/*.md", { eager: true }),
     );
 
-    return [
-        { params: { tag: "astro" }, props: { posts: posts } },
-        { params: { tag: "successes" }, props: { posts: posts } },
-        { params: { tag: "community" }, props: { posts: posts } },
-        { params: { tag: "blogging" }, props: { posts: posts } },
-        { params: { tag: "setbacks" }, props: { posts: posts } },
-        { params: { tag: "learning in public" }, props: { posts: posts } },
+    const uniqueTags = [
+        ...new Set(posts.map((post: any) => post.frontmatter.tags).flat()),
     ];
+
+    return uniqueTags.map((tag) => {
+        const filteredPosts = posts.filter((post: any) =>
+            post.frontmatter.tags.includes(tag),
+        );
+        return {
+            params: { tag },
+            props: { posts: filteredPosts },
+        };
+    });
 }
 
 const { tag } = Astro.params;
 const { posts } = Astro.props;
-const filteredPosts = posts.filter((post: any) =>
-    post.frontmatter.tags?.includes(tag),
-);
 ---
 
 <BaseLayout pageTitle={tag}>
     <p>Posts tagged with {tag}</p>
     <ul>
-        {filteredPosts.map((post: any) => <BlogPost post={post} />)}
+        {posts.map((post: any) => <BlogPost post={post} />)}
     </ul>
 </BaseLayout>
