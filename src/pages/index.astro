@@ -1,27 +1,8 @@
 ---
-import Footer from '../components/Footer.astro';
-import Header from '../components/Header.astro';
-import '../styles/global.css';
+import DefaultLayout from "../layouts/DefaultLayout.astro";
+const pageTitle = "Home Page";
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<Header />
-
-		<h1>My Astro Site</h1>
-		
-		<Footer />
-
-		<script>
-			import  "../scripts/menu";
-		</script>
-	</body>
-</html>
+<DefaultLayout pageTitle={pageTitle}>
+	<h2>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus officiis repellendus tempore doloribus atque incidunt quod nostrum, similique, eligendi laudantium dolor debitis vitae voluptate perferendis esse, maiores non consequuntur rem!</h2>
+</DefaultLayout>
