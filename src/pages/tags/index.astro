@@ -1,28 +1,26 @@
 ---
-import DefaultLayout from "./DefaultLayout.astro";
+import DefaultLayout from "../../layouts/DefaultLayout.astro";
 
-const { frontmatter } = Astro.props;
+const posts = Object.values(import.meta.glob("../posts/*.md", { eager: true }));
+
+const uniqueTags = [
+    ...new Set(posts.map((post: any) => post.frontmatter.tags).flat()),
+];
+
+const pageTitle = "Tags index";
 ---
 
-<DefaultLayout pageTitle={frontmatter.title}>
-    <p><em>{frontmatter.description}</em></p>
-    <p>published on: {frontmatter.pubDate.toString().slice(0, 10)}</p>
-
-    <p>Written by: {frontmatter.author}</p>
-
-    <img src={frontmatter.image.url} width="300" alt={frontmatter.image.alt} />
-
+<DefaultLayout pageTitle={pageTitle}>
+    <h3>Tags list</h3>
     <div class="tags">
         {
-            frontmatter.tags.map((tag: any) => (
+            uniqueTags.map((tag: any) => (
                 <p class="tag">
                     <a href={`/tags/${tag}`}>{tag}</a>
                 </p>
             ))
         }
     </div>
-
-    <slot />
 </DefaultLayout>
 
 <style>
