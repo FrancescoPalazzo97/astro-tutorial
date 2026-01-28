@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 import DefaultLayout from "./DefaultLayout.astro";
 
 const { frontmatter } = Astro.props;
@@ -10,7 +11,13 @@ const { frontmatter } = Astro.props;
 
     <p>Written by: {frontmatter.author}</p>
 
-    <img src={frontmatter.image.url} width="300" alt={frontmatter.image.alt} />
+    <Image
+        src={frontmatter.image.url}
+        width="200"
+        height="100"
+        alt={frontmatter.image.alt}
+        loading={"eager"}
+    />
 
     <div class="tags">
         {
