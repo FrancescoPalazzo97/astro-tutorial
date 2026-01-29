@@ -1,5 +1,6 @@
 ---
 import DefaultLayout from "../layouts/DefaultLayout.astro";
+import { Greeting } from "../components/Greeting";
 const pageTitle = "Home Page";
 ---
 
@@ -10,4 +11,5 @@ const pageTitle = "Home Page";
 		similique, eligendi laudantium dolor debitis vitae voluptate perferendis
 		esse, maiores non consequuntur rem!
 	</h2>
+	<Greeting client:load messages={["Ciao", "Salve", "Ehilà", "Ehi tu"]} />
 </DefaultLayout>
