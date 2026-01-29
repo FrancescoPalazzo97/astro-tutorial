@@ -1,6 +1,5 @@
 ---
 const { post } = Astro.props;
-console.log("DEBUG post:", JSON.stringify(post, null, 2));
 ---
 
 <li><a href={`/posts/${post.id}`}>{post.data.title}</a></li>
