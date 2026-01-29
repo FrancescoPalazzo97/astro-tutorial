@@ -4,9 +4,7 @@ import DefaultLayout from "../../layouts/DefaultLayout.astro";
 
 const posts = await getCollection("blog");
 
-const uniqueTags = [
-    ...new Set(posts.map((post: any) => post.data.tags).flat()),
-];
+const uniqueTags = [...new Set(posts.map((post) => post.data.tags).flat())];
 
 const pageTitle = "Tags index";
 ---
